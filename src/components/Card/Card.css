@@ -1,0 +1,89 @@
+/* Card */
+
+.card-cnt {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  margin: 50px;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  min-height: 600px;
+  background-color: white;
+}
+
+/* Results  */
+
+.results-cnt {
+  width: 100%;
+}
+
+.results-msg {
+  margin: 10px 0 15px 0;
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  margin: 10px 0 10px 0;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Accordion  */
+
+.accordion-active {
+  overflow-y: auto;
+  height: 300px;
+  transition: all 0.75s;
+}
+
+.accordion {
+  height: 0;
+  transition: all 0.75s;
+}
+
+/* Arrow buttons */
+
+#arrow-btn {
+  transition: all 0.75s;
+  transform: rotate(0deg);
+}
+
+#arrow-btn-active {
+  transition: all 0.75s;
+  transform: rotate(180deg);
+}
+
+/* Spinner */
+
+.lds-dual-ring {
+  display: inline-block;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgb(134, 191, 243);
+  border-color: rgb(134, 191, 243) transparent rgb(134, 191, 243) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

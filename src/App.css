@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#root,
-.App {
-  height: 100%;
+html {
+  background-color: #e5e5e5;
 }

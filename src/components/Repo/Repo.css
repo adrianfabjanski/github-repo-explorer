@@ -1,0 +1,24 @@
+.repo-cnt {
+  display: flex;
+  justify-content: space-between;
+  background-color: #e0e0e0;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  min-height: 100px;
+  width: 95%;
+  float: right;
+}
+
+.repo-head {
+  width: 70%;
+  word-wrap: break-word;
+}
+
+.repo-desc {
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
