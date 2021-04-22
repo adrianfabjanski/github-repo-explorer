@@ -4,11 +4,13 @@ import axios from "axios";
 import { FaAngleUp } from "react-icons/fa";
 import Repo from "../Repo/Repo";
 import Input from "../Input/Input";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 
-const Card = () => {
+const Card = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
   const [collapsedId, setCollapsedId] = useState();
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,26 +23,23 @@ const Card = () => {
     axios
       .get(`https://api.github.com/search/users?q=${searchQuery}&per_page=5`)
       .then((res) => {
-        setResults(res.data.items);
+        props.actions.setUsers(res.data.items);
         setSearching(false);
       });
   };
 
   const handleCollapse = (id) => {
-    if (id === collapsedId) {
-      setCollapsedId(0);
-    } else {
-      setCollapsedId(id);
-    }
+    id === collapsedId ? setCollapsedId(0) : setCollapsedId(id);
   };
 
   const getRepos = (login) => {
     axios.get(`https://api.github.com/users/${login}/repos`).then((res) => {
       setRepos(res.data);
-      console.log(res.data);
       setLoading(false);
     });
   };
+
+  console.log(repos);
 
   return (
     <div className="card-cnt">
@@ -51,12 +50,12 @@ const Card = () => {
           setSearchQuery={setSearchQuery}
         />
         <div className="results-cnt">
-          {results.length > 0 ? (
+          {props.applicationState.users.length > 0 ? (
             <div className="results-msg">
               <span>Showing users for "{searchTerm}"</span>
             </div>
           ) : null}
-          {results.map((result) => (
+          {props.applicationState.users.map((result) => (
             <div key={result.id}>
               <div
                 className="result"
@@ -85,7 +84,7 @@ const Card = () => {
                         <div className="lds-dual-ring"></div>
                       </div>
                     ) : repos.length > 0 ? (
-                      repos.map((repo) => <Repo repo={repo} />)
+                      repos.map((repo) => <Repo repo={repo} key={repo.id} />)
                     ) : (
                       <div style={{ textAlign: "center" }}>
                         <p>No repos found</p>
@@ -102,4 +101,9 @@ const Card = () => {
   );
 };
 
-export default Card;
+const mapStateToProps = (state) => ({ applicationState: state });
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actions, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
