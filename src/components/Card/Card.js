@@ -10,7 +10,6 @@ import * as actions from "../../store/actions";
 
 const Card = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
   const [collapsedId, setCollapsedId] = useState();
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -19,7 +18,7 @@ const Card = (props) => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearching(true);
-    setSearchTerm(searchQuery);
+    props.actions.setSearchTerm(searchQuery);
     axios
       .get(`https://api.github.com/search/users?q=${searchQuery}&per_page=5`)
       .then((res) => {
@@ -39,8 +38,6 @@ const Card = (props) => {
     });
   };
 
-  console.log(repos);
-
   return (
     <div className="card-cnt">
       <div className="card">
@@ -52,7 +49,9 @@ const Card = (props) => {
         <div className="results-cnt">
           {props.applicationState.users.length > 0 ? (
             <div className="results-msg">
-              <span>Showing users for "{searchTerm}"</span>
+              <span>
+                Showing users for "{props.applicationState.searchTerm}"
+              </span>
             </div>
           ) : null}
           {props.applicationState.users.map((result) => (

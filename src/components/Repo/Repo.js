@@ -16,9 +16,7 @@ const Repo = ({ repo }) => {
             <p className="repo-desc">{repo.description}</p>
           </div>
           <div>
-            <h4 style={{ fontSize: "15px" }}>
-              {repo.stargazers_count} &#9733;
-            </h4>
+            <h4 id="repo-stars">{repo.stargazers_count} &#9733;</h4>
           </div>
         </div>
       </a>
