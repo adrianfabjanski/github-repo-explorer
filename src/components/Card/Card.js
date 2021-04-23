@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Card.css";
 import axios from "axios";
-import { FaAngleUp } from "react-icons/fa";
+import { FaAngleUp, FaTimes } from "react-icons/fa";
 import Repo from "../Repo/Repo";
 import Input from "../Input/Input";
 import { bindActionCreators } from "redux";
@@ -38,6 +38,10 @@ const Card = (props) => {
     });
   };
 
+  const handleClear = () => {
+    props.actions.setUsers([]);
+  };
+
   return (
     <div className="card-cnt">
       <div className="card">
@@ -52,6 +56,7 @@ const Card = (props) => {
               <span>
                 Showing users for "{props.applicationState.searchTerm}"
               </span>
+              <FaTimes id="clear-btn" onClick={handleClear} title="Clear" />
             </div>
           ) : null}
           {props.applicationState.users.map((result) => (

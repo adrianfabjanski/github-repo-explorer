@@ -25,7 +25,14 @@
 }
 
 .results-msg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 10px 0 15px 0;
+}
+
+#clear-btn {
+  cursor: pointer;
 }
 
 .result {
